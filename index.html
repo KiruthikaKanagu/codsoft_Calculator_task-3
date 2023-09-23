@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" type="image/png" sizes="32x32" href="./images/favicon-32x32.png">
+  <title>Calculator 🧡 </title>
+  <link rel="stylesheet" href="style.css">
+
+</head>
+
+<body>
+  <div class="containers">
+    <div class="calculator">
+      <div class="heading">
+        <h3>Calc</h3>
+        <h4>Theme</h4>
+      </div>
+      <input type="text" placeholder="0" id="input">
+      <button onclick="display(7)">7</button>
+      <button onclick="display(8)">8</button>
+      <button onclick="display(9)">9</button>
+      <button onclick="del()">DEL</button>
+      <button onclick="display(4)">4</button>
+      <button onclick="display(5)">5</button>
+      <button onclick="display(6)">6</button>
+      <button onclick="display('+')">+</button>
+      <button onclick="display(1)">1</button>
+      <button onclick="display(2)">2</button>
+      <button onclick="display(3)">3</button>
+      <button onclick="display('-')">-</button>
+      <button onclick="display('.')">.</button>
+      <button onclick="display(0)">0</button>
+      <button onclick="display('/')">/</button>
+      <button onclick="display('*')">x</button>
+      <button onclick="clr()" id="reset">RESET</button>
+      <button onclick="calculate()" id="equal">=</button>
+
+    </div>
+  </div>
+  <script>
+    let final = document.getElementById("input")
+    function display(number) {
+      final.value += number;
+    }
+    function calculate() {
+      try {
+        final.value = eval(final.value);
+      }
+      catch (error) {
+        alert("Invalid Input ❌")
+      }
+    }
+    function clr() {
+      final.value = "";
+    }
+    function del() {
+      final.value = final.value.slice(0, -1);
+    } 
+    
+  function handlePress(event) {
+    const key = event.key;
+    if (/[0-9+\-*/.=]/.test(key)) {
+      display(key);
+    } else if (key === "Enter") {
+      calculate();
+    } else if (key === "Backspace") {
+      del();
+      event.preventDefault();
+    }
+  }
+  document.addEventListener("keydown", handlePress);
+  </script>
+  
+</body>
+
+</html>
